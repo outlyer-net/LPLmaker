@@ -16,13 +16,13 @@ RomDirs[0]="SNES"
 CoreLibs[0]="snes9x_libretro.so"
 CoreNames[0]="Snes9x"
 PlaylistNames[0]="Nintendo - Super Nintendo Entertainment System"
-SupportedExtensions[0]="*.smc *.fig *.sfc *.gd3 *.gd7 *.dx2 *.bsx *.swc"
+SupportedExtensions[0]="smc fig sfc gd3 gd7 dx2 bsx swc"
 
 RomDirs[1]="NES"
 CoreLibs[1]="nestopia_libretro.so"
 CoreNames[1]="Nestopia"
 PlaylistNames[1]="Nintendo - Nintendo Entertainment System"
-SupportedExtensions[1]="*.nes"
+SupportedExtensions[1]="nes"
 
 # No need to edit anything beyond this point, unless you don't want it to delete files, go down.
 
@@ -52,6 +52,7 @@ while [ -n "${RomDirs[$x]}" ];
 
     echo "Writing playlist now..."
 
+    SupportedExtensions[$x]=$(echo ${SupportedExtensions[$x]} | sed -r 's/^| / \*\./g')
     PlayList="$RetroArchDir/playlists/${PlaylistNames[$x]}".lpl
     :> "$PlayList"
     for f in ${SupportedExtensions[$x]}
