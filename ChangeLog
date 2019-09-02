@@ -1,0 +1,6 @@
+2019-09-02:
+    - Optionally scan within ZIP files too
+    - Use DETECT by default
+    - Use $HOME instead of a full path
+    - Do not delete all playlists, only generated ones
+    - Other bugfixes
