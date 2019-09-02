@@ -43,6 +43,30 @@ echo '!!'
 echo
 read -p "Press [Enter] key to continue (or abort with CTRL+C)..."
 
+# Prints a playlist entry.
+# The format is:
+# Path
+# Label
+# Core library path (or DETECT)
+# Core name (or DETECT)
+# CRC
+# Database
+print_rom_entry() {
+  local SystemIndex="$1"
+  local RomPath="$2"
+  local RomTitle="$3"
+  echo $RomPath
+  echo $RomTitle
+  if [[ "${CoreLibs[$SystemIndex]}" != 'DETECT' ]]; then
+    echo $CoresDir/${CoreLibs[$SystemIndex]}
+  else
+    echo DETECT
+  fi
+  echo ${CoreNames[$SystemIndex]}
+  echo 0\|crc
+  echo "${PlaylistNames[$SystemIndex]}".lpl
+}
+
 while [ -n "${RomDirs[$x]}" ]; 
   do
     pushd "$RomsDir/${RomDirs[$x]}" > /dev/null
@@ -58,18 +82,7 @@ while [ -n "${RomDirs[$x]}" ];
     for f in ${SupportedExtensions[$x]}
       do
       [ -f "$f" ] || continue
-        (
-          echo "$RomsDir/${RomDirs[$x]}/$f"
-          echo ${f%%.*}
-          if [[ "${CoreLibs[$x]}" != 'DETECT' ]]; then
-            echo $CoresDir/${CoreLibs[$x]}
-          else
-            echo DETECT
-          fi
-          echo ${CoreNames[$x]}
-          echo 0\|crc
-          echo "${PlaylistNames[$x]}".lpl
-        ) >> "$PlayList"
+        print_rom_entry $x "$RomsDir/${RomDirs[$x]}/$f" "${f%%.*}" >> "$PlayList"
       done
       echo
       echo "$PlayList"
