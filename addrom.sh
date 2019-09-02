@@ -60,7 +60,11 @@ while [ -n "${RomDirs[$x]}" ];
         (
           echo "$RomsDir/${RomDirs[$x]}/$f"
           echo ${f%%.*}
-          echo $CoresDir/${CoreLibs[$x]}
+          if [[ "${CoreLibs[$x]}" != 'DETECT' ]]; then
+            echo $CoresDir/${CoreLibs[$x]}
+          else
+            echo DETECT
+          fi
           echo ${CoreNames[$x]}
           echo 0\|crc
           echo "${PlaylistNames[$x]}".lpl
