@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Script originally written by u/ShiftyAxel on reddit for windows, rewritten in bash for linux.
 
