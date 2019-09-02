@@ -84,8 +84,8 @@ while [ -n "${RomDirs[$x]}" ];  do
   :> "$PlayList"
   for f in ${SupportedExtensions[$x]} ; do
     [ -f "$f" ] || continue
-    print_rom_entry $x "$RomsDir/${RomDirs[$x]}/$f" "${f%%.*}" >> "$PlayList"
-  done
+    print_rom_entry $x "$RomsDir/${RomDirs[$x]}/$f" "${f%%.*}"
+  done  >> "$PlayList"
   # Scan zips for supported ROMs?
   if [[ "${ScanZips[$x]}" -eq 1 ]]; then
     for zip in *.zip ; do
@@ -93,9 +93,9 @@ while [ -n "${RomDirs[$x]}" ];  do
       # Test file contents against known extensions
       while read CompressedFile ; do
         print_rom_entry "$x" "$RomsDir/${RomDirs[$x]}/$zip#$CompressedFile" "${CompressedFile%%.*}"
-      done < <(zipinfo -1 "$zip" | grep -E "$SupportedExtensionsRE") >> "$PlayList"
+      done < <(zipinfo -1 "$zip" | grep -E "$SupportedExtensionsRE")
     done
-  fi
+  fi >> "$PlayList"
   echo
   echo "$PlayList"
 
