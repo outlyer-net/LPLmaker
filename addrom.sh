@@ -3,8 +3,8 @@
 # Script originally written by u/ShiftyAxel on reddit for windows, rewritten in bash for linux.
 
 # Set to wherever your retroarch directory is (contains paylists folder, cores folder, etc.), typically in ~/.config/retroarch
-RetroArchDir="/home/jordan/.config/retroarch"
-RomsDir="/home/jordan/Roms"
+RetroArchDir="$HOME/.config/retroarch"
+RomsDir="$HOME/Roms"
 
 # If you use core updater change this to home/username/.config/retroarch/cores/
 CoresDir="/usr/lib/libretro"
