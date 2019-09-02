@@ -30,20 +30,18 @@ x=0
 
 clear
 
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "!!                                                                            !!"
-echo "!!  WARNING: Continuing to run this program will delete your playlist files.  !!"
-echo "!!     If you would like to back them up, do so now, or RIP in pepperonis     !!"
-echo "!!                             to your playlists.                             !!"
-echo "!!                                                                            !!"
-echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo '!!'
+echo '!! **** WARNING **** '
+echo '!!'
+echo '!! The following playlists will be overwritten if they exist.'
+echo '!! Back them up now if you'\''d like to do so or they'\''ll be gone.'
+echo '!!'
+for PlayList in "${PlaylistNames[@]}"; do
+  echo "!! - $PlayList"
+done
+echo '!!'
 echo
-read -p "Press [Enter] key to continue..."
-
-##############################################
-# This deletes all playlists (only .lpl files)
-rm -f "$RetroArchDir"/playlists/*.lpl
-##############################################
+read -p "Press [Enter] key to continue (or abort with CTRL+C)..."
 
 while [ -n "${RomDirs[$x]}" ]; 
   do
@@ -54,6 +52,8 @@ while [ -n "${RomDirs[$x]}" ];
 
     echo "Writing playlist now..."
 
+    PlayList="$RetroArchDir/playlists/${PlaylistNames[$x]}".lpl
+    :> "$PlayList"
     for f in ${SupportedExtensions[$x]}
       do
       [ -f "$f" ] || continue
@@ -64,10 +64,10 @@ while [ -n "${RomDirs[$x]}" ];
           echo ${CoreNames[$x]}
           echo 0\|crc
           echo "${PlaylistNames[$x]}".lpl
-        ) >> "$RetroArchDir/playlists/${PlaylistNames[$x]}".lpl
+        ) >> "$PlayList"
       done
       echo
-      echo "$RetroArchDir/playlists/${PlaylistNames[$x]}".lpl
+      echo "$PlayList"
 
     echo
     popd > /dev/null
