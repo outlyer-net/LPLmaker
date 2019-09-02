@@ -71,6 +71,26 @@ print_rom_entry() {
   echo "${PlaylistNames[$SystemIndex]}".lpl
 }
 
+get_rom_count() {
+  local globs="$1"
+  local scanzips="$2"
+  local uncompressed=$(ls $globs 2>/dev/null | wc -l)
+  local compressed=0
+  if [[ "$scanzips" -eq 1 ]]; then
+    compressed=$(ls *.zip 2>/dev/null | wc -l)
+  fi
+  echo $(( $uncompressed + $compressed ))
+}
+
+# progress(current index, total, current file name)
+progress() {
+  local index=$1
+  local total=$2
+  local current="$3"
+  # Trim to at most 64 characters
+  printf "[%d/%d] - %-64s\r" $index $total "${current:0:63}" >&2
+}
+
 while [ -n "${RomDirs[$x]}" ];  do
   pushd "$RomsDir/${RomDirs[$x]}" > /dev/null
   echo "======================================================================"
@@ -82,20 +102,28 @@ while [ -n "${RomDirs[$x]}" ];  do
   SupportedExtensions[$x]=$(echo ${SupportedExtensions[$x]} | sed -r 's/^| / \*\./g')
   PlayList="$RetroArchDir/playlists/${PlaylistNames[$x]}".lpl
   :> "$PlayList"
+
+  FileCount=$(get_rom_count "${SupportedExtensions[$x]}" "${ScanZips[$x]}")
+  declare -i FileNum=1
   for f in ${SupportedExtensions[$x]} ; do
     [ -f "$f" ] || continue
+    progress $FileNum $FileCount "$f"
     print_rom_entry $x "$RomsDir/${RomDirs[$x]}/$f" "${f%%.*}"
+    FileNum+=1
   done  >> "$PlayList"
   # Scan zips for supported ROMs?
   if [[ "${ScanZips[$x]}" -eq 1 ]]; then
     for zip in *.zip ; do
       [[ -f "$zip" ]] || continue
       # Test file contents against known extensions
+      progress $FileNum $FileCount "$zip"
       while read CompressedFile ; do
         print_rom_entry "$x" "$RomsDir/${RomDirs[$x]}/$zip#$CompressedFile" "${CompressedFile%%.*}"
       done < <(zipinfo -1 "$zip" | grep -E "$SupportedExtensionsRE")
+      FileNum+=1
     done
   fi >> "$PlayList"
+  printf '\r%80s' '' >&2 # Clear the progress output
   echo
   echo "$PlayList"
 
