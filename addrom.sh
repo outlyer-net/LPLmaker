@@ -56,7 +56,7 @@ while [ -n "${RomDirs[$x]}" ];
 
     for f in ${SupportedExtensions[$x]}
       do
-      [ -f "$f" ] || break
+      [ -f "$f" ] || continue
         (
           echo "$RomsDir/${RomDirs[$x]}/$f"
           echo ${f%%.*}
