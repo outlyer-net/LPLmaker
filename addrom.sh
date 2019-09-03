@@ -1,16 +1,14 @@
 #!/bin/bash
 
 # Script originally written by u/ShiftyAxel on reddit for windows, rewritten in bash for linux.
+# Create a configuration file to adapt to your system and needs, an example configuration is provided.
 
-# Set to wherever your retroarch directory is (contains paylists folder, cores folder, etc.), typically in ~/.config/retroarch
+# Your retroarch directory (contains paylists folder, cores folder, etc.), typically in ~/.config/retroarch
 RetroArchDir="$HOME/.config/retroarch"
+# Your base ROMs directory
 RomsDir="$HOME/Roms"
-
-# If you use core updater change this to home/username/.config/retroarch/cores/
+# Where cores are located, if you use core updater it will be something like ~/.config/retroarch/cores/
 CoresDir="/usr/lib/libretro"
-
-# Example of how to setup a SNES and NES playlist.
-# Can use "DETECT" instead of corelibs and corename, as well as playlist name if unsure
 
 # TODO: Load from ~/.config
 if [[ -f lplmaker.conf ]]; then
@@ -24,9 +22,9 @@ else
   PlaylistNames[$x]="Arcade"
   SupportedExtensions[$x]="zip"
   ScanZips[$x]=0
+  # TODO: Resolve MAME names
+  # TODO: Allow recursive scans
 fi
-
-# No need to edit anything beyond this point, unless you don't want it to delete files, go down.
 
 x=0
 
