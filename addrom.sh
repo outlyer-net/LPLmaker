@@ -22,7 +22,7 @@ else
   PlaylistNames[$x]="Arcade"
   SupportedExtensions[$x]="zip"
   ScanZips[$x]=0
-  # TODO: Resolve MAME names
+  QueryMame[$x]=1
   # TODO: Allow recursive scans
 fi
 
@@ -55,6 +55,16 @@ print_rom_entry() {
   local SystemIndex="$1"
   local RomPath="$2"
   local RomTitle="$3"
+  if [[ ${QueryMame[$SystemIndex]} -eq 1 ]]; then
+    # Use MAME to get the Rom title
+    local rt=$(mame -ll "$RomTitle" \
+                | awk '{$1="";print}' \
+                | sed -e 1d -e 's/^[[:space:]]*"//' -e 's/"$//' \
+              )
+    if [[ -n $rt ]]; then
+      RomTitle="$rt"
+    fi
+  fi
   echo $RomPath
   echo $RomTitle
   if [[ "${CoreLibs[$SystemIndex]}" != 'DETECT' ]]; then

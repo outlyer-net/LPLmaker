@@ -22,8 +22,10 @@
 # - PlaylistNames[$x] - The name of the playlist.
 #                       Will be used as the filename (with .lpl extension) and displayed in the UI.
 # - SupportedExtensions[$x] - A space-separated list of valid extensions for this playlist.
-# - ScanZips[$x] - Set to 1 to look inside zip files for the extensions above.
+# - ScanZips[$x] - (Optional) Set to 1 to look inside zip files for the extensions above.
 #                  The core must have support for zipped ROM loading.
+#                  Requires the zipinfo command.
+# - QueryMame[$x] - (Optional) Set to 1 to query MAME for the ROM title (only makes sense on arcade ROMs)
 
 #x=0
 #RomDirs[$x]="SNES"
