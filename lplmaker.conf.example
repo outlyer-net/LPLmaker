@@ -1,0 +1,21 @@
+# Configuration example for LPLmaker.
+# This is included directly by the script, so it must use Bash syntax, and
+#  it CAN break the script.
+
+# RomsDir=/mounts/Roms
+
+# x=0
+# RomDirs[$x]="SNES"
+# CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
+# CoreNames[$x]="DETECT" # or e.g. "Snes9x"
+# PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
+# SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
+# ScanZips[$x]=1
+
+# x+=1
+# RomDirs[$x]="NES"
+# CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
+# CoreNames[$x]="DETECT" # or e.g. "Nestopia"
+# PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
+# SupportedExtensions[$x]="nes"
+# ScanZips[$x]=1

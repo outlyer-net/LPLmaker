@@ -12,21 +12,26 @@ CoresDir="/usr/lib/libretro"
 # Example of how to setup a SNES and NES playlist.
 # Can use "DETECT" instead of corelibs and corename, as well as playlist name if unsure
 
-x=0
-RomDirs[$x]="SNES"
-CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
-CoreNames[$x]="DETECT" # or e.g. "Snes9x"
-PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
-SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
-ScanZips[$x]=1
+# TODO: Load from ~/.config
+if [[ -f lplmaker.conf ]]; then
+  source lplmaker.conf
+else
+  x=0
+  RomDirs[$x]="SNES"
+  CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
+  CoreNames[$x]="DETECT" # or e.g. "Snes9x"
+  PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
+  SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
+  ScanZips[$x]=1
 
-x+=1
-RomDirs[$x]="NES"
-CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
-CoreNames[$x]="DETECT" # or e.g. "Nestopia"
-PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
-SupportedExtensions[$x]="nes"
-ScanZips[$x]=1
+  x+=1
+  RomDirs[$x]="NES"
+  CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
+  CoreNames[$x]="DETECT" # or e.g. "Nestopia"
+  PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
+  SupportedExtensions[$x]="nes"
+  ScanZips[$x]=1
+fi
 
 # No need to edit anything beyond this point, unless you don't want it to delete files, go down.
 
