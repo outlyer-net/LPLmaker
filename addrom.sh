@@ -16,21 +16,14 @@ CoresDir="/usr/lib/libretro"
 if [[ -f lplmaker.conf ]]; then
   source lplmaker.conf
 else
+  # Defaults. See lplmaker.conf for more details.
   x=0
-  RomDirs[$x]="SNES"
-  CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
-  CoreNames[$x]="DETECT" # or e.g. "Snes9x"
-  PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
-  SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
-  ScanZips[$x]=1
-
-  x+=1
-  RomDirs[$x]="NES"
-  CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
-  CoreNames[$x]="DETECT" # or e.g. "Nestopia"
-  PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
-  SupportedExtensions[$x]="nes"
-  ScanZips[$x]=1
+  RomDirs[$x]="MAME"
+  CoreLibs[$x]="DETECT" # or e.g. "mame_libretro.so"
+  CoreNames[$x]="DETECT" # or e.g. "Arcade (MAME)"
+  PlaylistNames[$x]="Arcade"
+  SupportedExtensions[$x]="zip"
+  ScanZips[$x]=0
 fi
 
 # No need to edit anything beyond this point, unless you don't want it to delete files, go down.
