@@ -8,6 +8,7 @@
 #RomsDir="$HOME/Roms"
 
 # If you use core updater change this to home/username/.config/retroarch/cores/
+# This is only needed if you aren't setting the cores to DETECT
 #CoresDir="/usr/lib/libretro"
 
 # Example of how to setup a SNES and NES playlist.
