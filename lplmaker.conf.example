@@ -1,21 +1,41 @@
 # Configuration example for LPLmaker.
 # This is included directly by the script, so it must use Bash syntax, and
 #  it CAN break the script.
+# Uncomment the lines below to configure to your liking.
 
-# RomsDir=/mounts/Roms
+# Set to wherever your retroarch directory is (contains paylists folder, cores folder, etc.), typically in ~/.config/retroarch
+#RetroArchDir="$HOME/.config/retroarch"
+#RomsDir="$HOME/Roms"
 
-# x=0
-# RomDirs[$x]="SNES"
-# CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
-# CoreNames[$x]="DETECT" # or e.g. "Snes9x"
-# PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
-# SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
-# ScanZips[$x]=1
+# If you use core updater change this to home/username/.config/retroarch/cores/
+#CoresDir="/usr/lib/libretro"
 
-# x+=1
-# RomDirs[$x]="NES"
-# CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
-# CoreNames[$x]="DETECT" # or e.g. "Nestopia"
-# PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
-# SupportedExtensions[$x]="nes"
-# ScanZips[$x]=1
+# Example of how to setup a SNES and NES playlist.
+# Can use "DETECT" instead of corelibs and corename, as well as playlist name if unsure
+#
+# Fields:
+# - RomDirs[$x] - The directory, relative to RomsDir, where ROMs for this playlist are located.
+# - CoreLibs[$x] - The library name for the appropriate core, usually <name>_libretro.so.
+#                  Using DETECT will make RetroArch try to detect appropriate cores and let you pick.
+# - CoreNames[$x] - The name of the core. Use DETECT to let RetroArch adjust it.
+# - PlaylistNames[$x] - The name of the playlist.
+#                       Will be used as the filename (with .lpl extension) and displayed in the UI.
+# - SupportedExtensions[$x] - A space-separated list of valid extensions for this playlist.
+# - ScanZips[$x] - Set to 1 to look inside zip files for the extensions above.
+#                  The core must have support for zipped ROM loading.
+
+#x=0
+#RomDirs[$x]="SNES"
+#CoreLibs[$x]="DETECT" # or e.g. "snes9x_libretro.so"
+#CoreNames[$x]="DETECT" # or e.g. "Snes9x"
+#PlaylistNames[$x]="Nintendo - Super Nintendo Entertainment System"
+#SupportedExtensions[$x]="smc fig sfc gd3 gd7 dx2 bsx swc"
+#ScanZips[$x]=1
+
+#x+=1
+#RomDirs[$x]="NES"
+#CoreLibs[$x]="DETECT" # or e.g. "nestopia_libretro.so"
+#CoreNames[$x]="DETECT" # or e.g. "Nestopia"
+#PlaylistNames[$x]="Nintendo - Nintendo Entertainment System"
+#SupportedExtensions[$x]="nes"
+#ScanZips[$x]=1
