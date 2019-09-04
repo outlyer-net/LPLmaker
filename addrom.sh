@@ -1,5 +1,6 @@
 #!/bin/bash
 
+REVISION="2019.09.04"
 # Script originally written by u/ShiftyAxel on reddit for windows, rewritten in bash for linux.
 # Create a configuration file to adapt to your system and needs, an example configuration is provided.
 
@@ -10,10 +11,17 @@ RomsDir="$HOME/Roms"
 # Where cores are located, if you use core updater it will be something like ~/.config/retroarch/cores/
 CoresDir="/usr/lib/libretro"
 
-# TODO: Load from ~/.config
-if [[ -f lplmaker.conf ]]; then
-  source lplmaker.conf
-else
+HAS_CONFIG=0
+# Load configuration file(s)
+if [[ -f ~/.config/lplmaker.conf ]]; then
+  source ~/.config/lplmaker.conf
+  HAS_CONFIG=1
+fi
+if [[ -f ./lplmaker.conf ]]; then
+  source ./lplmaker.conf
+  HAS_CONFIG=1
+fi
+if [[ $HAS_CONFIG -ne 1 ]]; then
   # Defaults. See lplmaker.conf for more details.
   x=0
   RomDirs[$x]="MAME"
@@ -23,8 +31,8 @@ else
   SupportedExtensions[$x]="zip"
   ScanZips[$x]=0
   QueryMame[$x]=1
-  # TODO: Allow recursive scans
 fi
+# TODO: Allow recursive scans
 
 x=0
 

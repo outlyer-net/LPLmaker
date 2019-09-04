@@ -1,4 +1,4 @@
-2019-09-02:
+2019-09-04:
     - Added title resolution for MAME
     - Detach configuration, no need to modify the script itself anymore
     - Optionally scan within ZIP files too
